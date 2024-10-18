@@ -1,0 +1,24 @@
+<GridLayout rows="auto, *" [ngClass]="theme.background">
+  <GridLayout row="0" columns="auto, *, auto" class="header">
+    <Button col="0" text="&#8592;" (tap)="previousYear()" [ngClass]="theme.yearArrows"></Button>
+    <TextField col="1" [(ngModel)]="currentYear" (returnPress)="setYear(currentYear)" [ngClass]="theme.year"></TextField>
+    <Button col="2" text="&#8594;" (tap)="nextYear()" [ngClass]="theme.yearArrows"></Button>
+  </GridLayout>
+  <ScrollView row="1">
+    <GridLayout rows="auto, auto, auto, auto" columns="repeat(13, auto)" [ngClass]="{'grid-lines': theme.showGridLines}">
+      <!-- Week numbers column -->
+      <Label row="0" col="0" text="Week" [ngClass]="theme.weekNumber"></Label>
+      <Label *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']"
+             [text]="month" [col]="$index + 1" [ngClass]="theme.month"></Label>
+      
+      <ng-container *ngFor="let week of weeks; let weekIndex = index">
+        <Label [row]="weekIndex + 1" col="0" [text]="week[0].weekNumber" [ngClass]="theme.weekNumber"></Label>
+        <ng-container *ngFor="let day of week; let dayIndex = index">
+          <Label [row]="weekIndex + 1" [col]="dayIndex + 1" [text]="day.day"
+                 [ngClass]="getDayClass(day)">
+          </Label>
+        </ng-container>
+      </ng-container>
+    </GridLayout>
+  </ScrollView>
+</GridLayout>

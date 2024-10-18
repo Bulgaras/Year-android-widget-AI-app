@@ -1,0 +1,13 @@
+.header {
+  padding: 10;
+}
+
+.grid-lines Label {
+  border-width: 1;
+  border-color: #ccc;
+}
+
+Label {
+  text-align: center;
+  padding: 2;
+}
